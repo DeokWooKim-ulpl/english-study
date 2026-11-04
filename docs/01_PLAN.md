@@ -1,6 +1,6 @@
 # English Study Platform — 구축 계획서
 
-> 작성일: 2026-11-04 · 상태: 계획 v0.1
+> 작성일: 2026-11-04 · 상태: 계획 v0.2 (자동화 엔진을 Gemini 앱 "작업" + Google Drive로 변경 → 상세: [03_GEMINI_TASK_PIPELINE.md](03_GEMINI_TASK_PIPELINE.md))
 > 근거 수준 표기: **[공식]** 공식 문서 · **[커뮤니티]** 블로그/기사 · **[추정]** Claude 추정·일반 지식(검증 필요)
 
 ---
@@ -11,12 +11,12 @@
 |---|---|
 | 앱 형태 | **PWA(Progressive Web App)** 하나로 휴대폰·태블릿·PC 모두 대응. "홈 화면에 추가"하면 앱처럼 실행됨 |
 | 호스팅 | GitHub Pages (repo가 private이면 GitHub Pro 필요 → 대안: Cloudflare Pages 무료) |
-| 백그라운드 자동화 | **GitHub Actions 예약 실행(cron)** + **Gemini API** (자료 수집·정리·문제 생성) |
-| Gemini 앱 "예약된 작업" | 보조 용도로만 (휴대폰 알림용 "오늘의 표현" 등). GitHub에 직접 쓰기 불가 → 메인 엔진으로 부적합 |
+| 백그라운드 자동화 | **Gemini 앱 "작업(Task)"** 예약 실행 → 결과를 **Google Drive** 문서로 저장 |
+| Drive ↔ GitHub 연결 | **Google Apps Script** (매시간 Drive 문서 수거 → GitHub `data/`에 커밋, 매일 학습 현황을 Drive `ES_status`로 내보냄) |
 | 복습 알고리즘 | **FSRS** (Anki 최신 기본 알고리즘, `ts-fsrs` 라이브러리) |
 | 데이터 저장 | 학습 자료 = repo `data/` 폴더(JSON/MD, Actions가 매일 커밋) · 학습 기록 = 기기 IndexedDB → GitHub API로 `progress/`에 동기화 |
-| 리마인드 | 1단계: 매일 이메일/텔레그램 · 2단계: Web Push(PWA 알림) |
-| 첫 번째 할 일 | ① Gemini API 키 발급 → ② GitHub Secret 등록 → ③ MVP(독해 + 단어 복습 + 일일 자료 수집) 구축 |
+| 리마인드 | Gemini 작업이 매일 아침 `ES_status`를 읽고 알림 · 2단계: Web Push(PWA 알림) |
+| 첫 번째 할 일 | ① Drive 폴더 생성 → ② Gemini 작업 T1 1회 테스트 → ③ Apps Script 다리 + MVP(독해 + 단어 복습) 구축 |
 
 ---
 
@@ -91,6 +91,8 @@
 ---
 
 ## 3. 시스템 구조 (Architecture)
+
+> ⚠ v0.2: 아래 3.0~3.4의 "Actions + Gemini API" 수집 부분은 **[03_GEMINI_TASK_PIPELINE.md](03_GEMINI_TASK_PIPELINE.md)** 구조로 대체됨. GitHub Actions는 앱 빌드·배포와 데이터 검증만 담당.
 
 ```
 ┌───────────────── GitHub repo: english-study ─────────────────┐
@@ -192,8 +194,8 @@ english-study/
 
 ## 5. 지금 사용자가 직접 할 일 (Phase 0 체크리스트)
 
-1. [ ] Google AI Studio에서 Gemini API 키 발급 (https://aistudio.google.com)
-2. [ ] GitHub repo → Settings → Secrets and variables → Actions → `GEMINI_API_KEY` 등록
+1. [ ] Drive에 `english-study/inbox`, `processed`, `outbox` 폴더 + 최상위 `ES_status` 문서 생성
+2. [ ] Gemini 앱 "작업"으로 T1 프롬프트 1회 테스트 → 결과(문서 생성 여부, 저장 위치, JSON 형식) 공유
 3. [ ] repo 공개 여부 결정 (public: Pages 무료 / private: Pro 또는 Cloudflare Pages)
-4. [ ] 리마인드 수단 선택 (이메일 / 텔레그램 / 둘 다)
-5. [ ] 관심 분야 키워드 확정 (예: ultrafast laser, nonlinear optics, photonics …) → 독해 자료 수집 필터로 사용
+4. [ ] 관심 분야 키워드 확정 → `ES_status`에 기록
+5. [ ] GitHub fine-grained 토큰 발급 (english-study repo만, Contents 읽기/쓰기) — Apps Script 설치 단계에서 사용
