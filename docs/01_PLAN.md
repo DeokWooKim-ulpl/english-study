@@ -1,5 +1,7 @@
 # English Study Platform — 구축 계획서
 
+> ⚠ **최신 계획은 [04_PLAN_v2.md](04_PLAN_v2.md)**. 이 문서는 벤치마크(1절)·기능 아이디어 참고용.
+
 > 작성일: 2026-11-04 · 상태: 계획 v0.2 (자동화 엔진을 Gemini 앱 "작업" + Google Drive로 변경 → 상세: [03_GEMINI_TASK_PIPELINE.md](03_GEMINI_TASK_PIPELINE.md))
 > 근거 수준 표기: **[공식]** 공식 문서 · **[커뮤니티]** 블로그/기사 · **[추정]** Claude 추정·일반 지식(검증 필요)
 

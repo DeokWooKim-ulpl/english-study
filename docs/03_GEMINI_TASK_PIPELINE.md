@@ -1,5 +1,7 @@
 # Gemini 앱 "작업(Task)" + Google Drive 파이프라인
 
+> ⚠ **최신 계획은 [04_PLAN_v2.md](04_PLAN_v2.md)** (저장소: Drive 문서/GitHub → Google Sheets `ES_DB`, 작문 피드백: 이메일 트리거). 이 문서의 T1·T2 프롬프트는 초안으로 참고.
+
 > 2026-11-04 · v0.2 (Gemini API 호출 방식 → Gemini 앱 "작업" 방식으로 변경)
 > 근거 수준: **[공식]** 공식 문서 · **[커뮤니티]** 블로그/기사 · **[추정]** Claude 추정 · **[테스트 필요]** 직접 확인 필요
 

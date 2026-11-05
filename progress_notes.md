@@ -16,3 +16,12 @@
 **다음 할 일**
 - 사용자: Phase 0 테스트 (T1 1회 실행 → 문서 생성/폴더/JSON 확인 결과 공유)
 - Claude: 테스트 결과 반영 → Apps Script `collectInbox()` 작성 → PWA MVP
+
+## 2026-11-05
+**한 일**
+- 계획 v2 작성 (docs/04_PLAN_v2.md): 이메일 트리거로 Gemini 작업 자동 피드백, Google Sheets `ES_DB`를 DB로, Apps Script 웹 앱, GitHub 백업, 말하기 = 스크립트 1개/일 + 체크, 정기 복습(일/주/월)
+- 학습 계획 요일표 수정 (02)
+
+**다음 할 일**
+- 사용자: 04 문서 7절 테스트 A~D 결과 공유
+- Claude: 결과 반영 → Phase 1 (ES_DB 생성 스크립트, 웹 앱 뼈대, 백업)
