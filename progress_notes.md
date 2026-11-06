@@ -25,3 +25,12 @@
 **다음 할 일**
 - 사용자: 04 문서 7절 테스트 A~D 결과 공유
 - Claude: 결과 반영 → Phase 1 (ES_DB 생성 스크립트, 웹 앱 뼈대, 백업)
+
+## 2026-11-06
+**한 일**
+- 구현 방식 변경: Gemini Canvas 단일 앱 (앱 내 Gemini 호출 + Firestore 저장)
+- prompts/gemini_canvas_prompt.md 작성: 메인 프롬프트, 추가 프롬프트 5개, 아침 알림 작업
+
+**다음 할 일**
+- 사용자: Canvas에 메인 프롬프트 실행 → 동작 안 되는 기능 공유
+- 완성 후 Canvas 코드를 app/canvas/에 저장 (버전 관리)
